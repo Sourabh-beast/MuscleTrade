@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import { TrendingUp, TrendingDown } from "@mui/icons-material";
 
-const StockTicker = ({ refreshInterval = 15000 }) => {
+const StockTicker =({ refreshInterval = 15000, pxPerSecond = 120 }) => {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const mounted = useRef(true);
@@ -108,6 +108,23 @@ const StockTicker = ({ refreshInterval = 15000 }) => {
       clearInterval(interval);
     };
   }, [refreshInterval]);
+  const tickerRef = useRef(null);
+const [duration, setDuration] = useState(60);
+
+  // compute animation duration based on content width for consistent speed
+useEffect(() => {
+  if (!tickerRef.current) return;
+  // tickerRef holds the moving element which contains TWO copies of the content.
+  requestAnimationFrame(() => {
+    const el = tickerRef.current;
+    const totalScrollWidth = el.scrollWidth || 0;
+    const singleWidth = totalScrollWidth / 2 || 0;
+    // speed in px/sec controlled by pxPerSecond prop
+    const secs = Math.max(10, Math.round(singleWidth / pxPerSecond)); // minimum 10s
+    setDuration(secs);
+  });
+}, [stocks, pxPerSecond]);
+
 
   // Format price
   const formatPrice = (price) => {
@@ -184,17 +201,13 @@ const StockTicker = ({ refreshInterval = 15000 }) => {
           alignItems: "center",
           height: "100%",
           whiteSpace: "nowrap",
-          animation: "tickerScroll 120s linear infinite",
-          "@keyframes tickerScroll": {
-            "0%": {
-              transform: "translateX(0%)",
-            },
-            "100%": {
-              transform: "translateX(-100%)",
-            },
-          },
+          animation: `tickerScroll ${duration}s linear infinite`,
+    "@keyframes tickerScroll": {
+      "0%": { transform: "translateX(0%)" },
+      "100%": { transform: "translateX(-50%)" }, // animate only half because content is duplicated
+    },
+  }}
          
-        }}
       >
         {/* First set */}
         {stocks.map((stock, index) => (
@@ -262,6 +275,7 @@ const StockTicker = ({ refreshInterval = 15000 }) => {
         ))}
 
         {/* Second set for seamless loop */}
+        <Box sx={{ display: "inline-flex", alignItems: "center" }} aria-hidden="true">
         {stocks.map((stock, index) => (
           <Box
             key={`second-${index}`}
@@ -323,6 +337,7 @@ const StockTicker = ({ refreshInterval = 15000 }) => {
             />
           </Box>
         ))}
+        </Box>
       </Box>
     </Box>
   );
