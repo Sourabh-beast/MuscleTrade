@@ -46,11 +46,11 @@ export default function Navbar({ navItems }) {
   }
 
   const items = navItems || [
-    { label: "Trading", href: "/trade" },
-    { label: "Education", href: "/edu" },
-    { label: "Robo Advisor", href: "/robo" },
-    { label: "Portfolio", href: "/holding" },
-    { label: "Pricing", href: "/pricing" },
+    // { label: "Trading", href: "/trade" },
+    // { label: "Education", href: "/edu" },
+    // { label: "Robo Advisor", href: "/robo" },
+    // { label: "Portfolio", href: "/holding" },
+    // { label: "Pricing", href: "/pricing" },
   ];
 
   const handleDrawerToggle = () => {
