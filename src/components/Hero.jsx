@@ -13,11 +13,15 @@ import {
     Chip,
 } from '@mui/material';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 const TradingPlatformHero = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [animatedElements, setAnimatedElements] = useState([]);
+    function handleLogin() {
+        signIn('google', { callbackUrl: '/' });
+      }
 
     useEffect(() => {
         // Create floating animated elements
@@ -60,13 +64,14 @@ const TradingPlatformHero = () => {
     return (
         <Box
             sx={{
-                minHeight: '100vh',
+                // minHeight: '100vh',
                 background: '#000000',
                 position: 'relative',
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
-                px: isMobile ? 2 : 6
+                px: isMobile ? 2 : 6,
+                mt:5
             }}
         >
             <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 3 }}>
@@ -74,7 +79,7 @@ const TradingPlatformHero = () => {
                     container 
                     spacing={isMobile ? 4 : 6} 
                     alignItems="center" 
-                    sx={{ minHeight: '100vh' }}
+                    sx={{ minHeight: '85vh' }}
                 >
                     {/* Left Content */}
                     <Grid item xs={12} lg={6}>
@@ -139,6 +144,7 @@ Build confidence, trade smarter, and grow faster — all in one platform.
                                 <Button
                                     variant="outlined"
                                     size="large"
+                                    onClick={handleLogin}
                                     sx={{
                                         borderColor: '#00ff00',
                                         color: '#00ff00',
@@ -164,6 +170,7 @@ Build confidence, trade smarter, and grow faster — all in one platform.
                                 <Button
                                     variant="outlined"
                                     size="large"
+                                    onClick={handleLogin}
                                     sx={{
                                         borderColor: alpha('#ffffff', 0.3),
                                         color: alpha('#ffffff', 0.8),

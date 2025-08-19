@@ -18,6 +18,8 @@ import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import {signIn} from "next-auth/react";
+
 
 // Hamburger Menu Icon
 const MenuIcon = () => (
@@ -38,6 +40,10 @@ export default function Navbar({ navItems }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
+
+  function handleLogin() {
+    signIn('google', { callbackUrl: '/' });
+  }
 
   const items = navItems || [
     { label: "Trading", href: "/trade" },
@@ -169,9 +175,7 @@ export default function Navbar({ navItems }) {
         <Stack spacing={2}>
           <Button
             variant="outlined"
-            component={Link}
-            href="/auth/login"
-            onClick={handleMobileNavClick}
+            onClick={handleLogin}
             fullWidth
             sx={{
               textTransform: "none",
@@ -193,9 +197,7 @@ export default function Navbar({ navItems }) {
           </Button>
           <Button
             variant="contained"
-            component={Link}
-            href="/auth/signup"
-            onClick={handleMobileNavClick}
+            onClick={handleLogin}
             fullWidth
             sx={{
               textTransform: "none",
@@ -375,8 +377,7 @@ export default function Navbar({ navItems }) {
             >
               <Button
                 variant="outlined"
-                component={Link}
-                href="/auth/login"
+                onClick={handleLogin}
                 sx={{
                   textTransform: "none",
                   borderRadius: 2,
@@ -401,8 +402,7 @@ export default function Navbar({ navItems }) {
 
               <Button
                 variant="contained"
-                component={Link}
-                href="/auth/signup"
+                onClick={handleLogin}
                 sx={{
                   textTransform: "none",
                   borderRadius: 2,
