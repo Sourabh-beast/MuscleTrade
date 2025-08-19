@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 import Collapse from "@mui/material/Collapse";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import {signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 
 // Hamburger Menu Icon
@@ -96,21 +96,21 @@ export default function Navbar({ navItems }) {
             onClick={handleMobileNavClick}
           >
             <SvgIcon sx={{ fontSize: 20, color: "#22c55e" }} viewBox="0 0 24 24">
-              <path 
-                d="M3 3v18h18" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+              <path
+                d="M3 3v18h18"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              <path 
-                d="M7 16l3-3 2 2 5-5" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+              <path
+                d="M7 16l3-3 2 2 5-5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <rect x="13" y="6" width="2" height="4" fill="currentColor" rx="0.5" />
               <rect x="16" y="4" width="2" height="6" fill="currentColor" rx="0.5" />
@@ -186,7 +186,7 @@ export default function Navbar({ navItems }) {
               borderColor: "rgba(255, 255, 255, 0.25)",
               color: "rgba(255, 255, 255, 0.9)",
               backgroundColor: "rgba(255, 255, 255, 0.03)",
-              '&:hover': { 
+              '&:hover': {
                 borderColor: "rgba(34, 197, 94, 0.6)",
                 backgroundColor: "rgba(34, 197, 94, 0.08)",
                 color: "#22c55e",
@@ -208,7 +208,7 @@ export default function Navbar({ navItems }) {
               background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
               color: "#000000",
               boxShadow: "0 4px 14px rgba(34, 197, 94, 0.4)",
-              '&:hover': { 
+              '&:hover': {
                 background: "linear-gradient(135deg, #16a34a 0%, #15803d 100%)",
                 boxShadow: "0 6px 20px rgba(34, 197, 94, 0.5)",
               },
@@ -219,7 +219,7 @@ export default function Navbar({ navItems }) {
         </Stack>
       </Box>
 
-    
+
     </Box>
   );
 
@@ -271,21 +271,21 @@ export default function Navbar({ navItems }) {
               href="/"
             >
               <SvgIcon sx={{ fontSize: { xs: 20, md: 24 }, color: "#22c55e" }} viewBox="0 0 24 24">
-                <path 
-                  d="M3 3v18h18" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  fill="none" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
+                <path
+                  d="M3 3v18h18"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
-                <path 
-                  d="M7 16l3-3 2 2 5-5" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  fill="none" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
+                <path
+                  d="M7 16l3-3 2 2 5-5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <rect x="13" y="6" width="2" height="4" fill="currentColor" rx="0.5" />
                 <rect x="16" y="4" width="2" height="6" fill="currentColor" rx="0.5" />
@@ -369,9 +369,9 @@ export default function Navbar({ navItems }) {
           {/* Right: Auth Buttons (Desktop) & Mobile Menu Button */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
             {/* Desktop Auth Buttons */}
-            <Stack 
-              direction="row" 
-              spacing={1.5} 
+            <Stack
+              direction="row"
+              spacing={1.5}
               alignItems="center"
               sx={{ display: { xs: "none", md: "flex" } }}
             >
@@ -388,7 +388,7 @@ export default function Navbar({ navItems }) {
                   borderColor: "rgba(255, 255, 255, 0.25)",
                   color: "rgba(255, 255, 255, 0.9)",
                   backgroundColor: "rgba(255, 255, 255, 0.03)",
-                  '&:hover': { 
+                  '&:hover': {
                     borderColor: "rgba(34, 197, 94, 0.6)",
                     backgroundColor: "rgba(34, 197, 94, 0.08)",
                     color: "#22c55e",
@@ -414,7 +414,7 @@ export default function Navbar({ navItems }) {
                   color: "#000000",
                   boxShadow: "0 4px 14px rgba(34, 197, 94, 0.4)",
                   border: "1px solid rgba(34, 197, 94, 0.5)",
-                  '&:hover': { 
+                  '&:hover': {
                     background: "linear-gradient(135deg, #16a34a 0%, #15803d 100%)",
                     boxShadow: "0 6px 20px rgba(34, 197, 94, 0.5)",
                     transform: "translateY(-1px)",
@@ -445,7 +445,7 @@ export default function Navbar({ navItems }) {
           </Box>
         </Box>
 
-  
+
       </AppBar>
 
       {/* Mobile Drawer */}

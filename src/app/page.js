@@ -1,5 +1,6 @@
-import StockMarketHero from "@/components/Hero";
-import Ticker from "@/components/StockTicker";
+
+import Hero from "@/components/Hero";
+import PriceCard from "@/components/PriceCard";
 import { Stack, Container, Box } from "@mui/material";
 import StockTicker from "@/components/Ticker";
 
@@ -7,7 +8,7 @@ export default function Home() {
   return (
     <Box sx={{ backgroundColor: "black", minHeight: "100vh" }}>
       <StockTicker refreshInterval={15000} />
-      <StockMarketHero />
+      <Hero />
 
       <Container maxWidth="xl" sx={{ py: 3 }}>
         <Stack
@@ -29,9 +30,9 @@ export default function Home() {
             },
           }}
         >
-          <Ticker symbol="RELIANCE.NS" refreshInterval={5000} />
-          <Ticker symbol="TCS.NS" refreshInterval={5000} />
-          <Ticker symbol="INFY.NS" refreshInterval={5000} />
+          <PriceCard symbol="RELIANCE.NS" refreshInterval={5000} />
+          <PriceCard symbol="TCS.NS" refreshInterval={5000} />
+          <PriceCard symbol="INFY.NS" refreshInterval={5000} />
         </Stack>
       </Container>
        

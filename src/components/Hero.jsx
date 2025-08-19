@@ -15,7 +15,7 @@ import {
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 
-const TradingPlatformHero = () => {
+const Hero = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [animatedElements, setAnimatedElements] = useState([]);
@@ -77,7 +77,7 @@ const TradingPlatformHero = () => {
             <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 3 }}>
                 <Grid 
                     container 
-                    spacing={isMobile ? 4 : 6} 
+                    spacing={isMobile ? 0 : 6} 
                     alignItems="center" 
                     sx={{ minHeight: '85vh' }}
                 >
@@ -280,4 +280,4 @@ Build confidence, trade smarter, and grow faster — all in one platform.
     );
 };
 
-export default TradingPlatformHero;
+export default Hero;

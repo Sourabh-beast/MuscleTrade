@@ -44,7 +44,7 @@ const darkTheme = createTheme({
   },
 });
 
-export default function Ticker({ symbol = 'RELIANCE.NS', refreshInterval = 5000 }) {
+export default function PriceCard({ symbol = 'RELIANCE.NS', refreshInterval = 5000 }) {
   const theme = darkTheme;
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [candles, setCandles] = useState(null);
