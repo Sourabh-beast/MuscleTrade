@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  email     String    @unique
+  name      String?
+  role      Role      @default(CLIENT)
+  accounts  Account[]
+  raTrades  RaTrade[] @relation("ra_owner")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Account {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String      @db.ObjectId
+  user             User        @relation(fields: [userId], references: [id])
+  broker           Broker
+  brokerAccountId  String
+  displayName      String?
+  consentGiven     Boolean     @default(false)
+  consentGivenAt   DateTime?
+  oauthToken       OAuthToken?
+  clientOrders     ClientOrder[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model OAuthToken {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  accountId       String   @unique @db.ObjectId
+  account         Account  @relation(fields: [accountId], references: [id])
+  accessTokenEnc  String
+  refreshTokenEnc String?
+  scope           String?
+  expiresAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model RaTrade {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  raId         String        @db.ObjectId
+  ra           User          @relation("ra_owner", fields: [raId], references: [id])
+  symbol       String
+  side         Side
+  qty          Int
+  orderType    OrderType
+  status       RaTradeStatus @default(PENDING)
+  clientOrders ClientOrder[]
+  createdAt    DateTime      @default(now())
+  processedAt  DateTime?
+}
+
+model ClientOrder {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  raTradeId     String     @db.ObjectId
+  raTrade       RaTrade    @relation(fields: [raTradeId], references: [id])
+  accountId     String     @db.ObjectId
+  account       Account    @relation(fields: [accountId], references: [id])
+  clientOrderId String?
+  status        OrderStatus @default(PENDING)
+  placedQty     Int?
+  filledQty     Int?       @default(0)
+  averagePrice  Float?
+  errorMessage  String?
+  correlationId String     @unique
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+enum Role {
+  RA
+  CLIENT
+}
+
+enum Broker {
+  UPSTOX
+  ANGEL
+  FYERS
+  ZERODHA
+  OTHER
+}
+
+enum Side {
+  BUY
+  SELL
+}
+
+enum OrderType {
+  MARKET
+  LIMIT
+}
+
+enum RaTradeStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum OrderStatus {
+  PENDING
+  PLACED
+  PARTIAL
+  FILLED
+  CANCELLED
+  FAILED
+}
